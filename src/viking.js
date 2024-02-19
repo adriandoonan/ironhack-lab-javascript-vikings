@@ -53,7 +53,7 @@ class War {
     addViking(viking) {
         try {
             if (!(viking instanceof Viking)) {
-                throw new TypeError('Should be a viking')
+                throw new TypeError('Should be a Viking')
             }
             this.vikingArmy.push(viking)
         }
@@ -64,7 +64,7 @@ class War {
     addSaxon(saxon) {
         try {
             if (!(saxon instanceof Saxon)) {
-                throw new TypeError('Should be a viking')
+                throw new TypeError('Should be a Saxon')
             }
             this.saxonArmy.push(saxon)
         }
@@ -72,22 +72,22 @@ class War {
             console.error(e)
         }
     }
-    vikingAttack() {
-        if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
-            return this.showStatus()
-        }
-        const message = randomElement(this.saxonArmy).receiveDamage(randomElement(this.vikingArmy).attack())
-        this.saxonArmy = this.saxonArmy.filter(element => element.health > 0)
-        return message
-    }
-    saxonAttack() {
-        if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
-            return this.showStatus()
-        }
-        const message = randomElement(this.vikingArmy).receiveDamage(randomElement(this.saxonArmy).attack())
-        this.vikingArmy = this.vikingArmy.filter(element => element.health > 0)
-        return message
-    }
+    // vikingAttack() {
+    //     if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
+    //         return this.showStatus()
+    //     }
+    //     const message = randomElement(this.saxonArmy).receiveDamage(randomElement(this.vikingArmy).attack())
+    //     this.saxonArmy = this.saxonArmy.filter(element => element.health > 0)
+    //     return message
+    // }
+    // saxonAttack() {
+    //     if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
+    //         return this.showStatus()
+    //     }
+    //     const message = randomElement(this.vikingArmy).receiveDamage(randomElement(this.saxonArmy).attack())
+    //     this.vikingArmy = this.vikingArmy.filter(element => element.health > 0)
+    //     return message
+    // }
     attack(attacker) {
         if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
             return this.showStatus()
