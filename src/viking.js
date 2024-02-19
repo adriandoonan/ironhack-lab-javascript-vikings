@@ -72,40 +72,34 @@ class War {
             console.error(e)
         }
     }
-    // vikingAttack() {
-    //     if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
-    //         return this.showStatus()
-    //     }
-    //     const message = randomElement(this.saxonArmy).receiveDamage(randomElement(this.vikingArmy).attack())
-    //     this.saxonArmy = this.saxonArmy.filter(element => element.health > 0)
-    //     return message
-    // }
-    // saxonAttack() {
-    //     if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
-    //         return this.showStatus()
-    //     }
-    //     const message = randomElement(this.vikingArmy).receiveDamage(randomElement(this.saxonArmy).attack())
-    //     this.vikingArmy = this.vikingArmy.filter(element => element.health > 0)
-    //     return message
-    // }
+    vikingAttack() {
+        if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
+            return this.showStatus()
+        }
+        const message = randomElement(this.saxonArmy).receiveDamage(randomElement(this.vikingArmy).attack())
+        this.saxonArmy = this.saxonArmy.filter(element => element.health > 0)
+        return message
+    }
+    saxonAttack() {
+        if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
+            return this.showStatus()
+        }
+        const message = randomElement(this.vikingArmy).receiveDamage(randomElement(this.saxonArmy).attack())
+        this.vikingArmy = this.vikingArmy.filter(element => element.health > 0)
+        return message
+    }
     attack(attacker) {
         if (this.saxonArmy.length === 0 || this.vikingArmy.length === 0) {
             return this.showStatus()
         }
-        try {
-            if (!['viking','saxon'].includes(attacker) ) {
-                throw new TypeError('attacker should be a Viking or Saxon')
-            }
-            let attackingArmy = attacker === 'viking' ? this.vikingArmy : this.saxonArmy 
-            let defendingArmy = attacker === 'viking' ? this.saxonArmy : this.vikingArmy 
-            const message = randomElement(defendingArmy).receiveDamage(randomElement(attackingArmy).attack())
-            this.vikingArmy = this.vikingArmy.filter(element => element.health > 0)
-            this.saxonArmy = this.saxonArmy.filter(element => element.health > 0)
-            return message
-        }
-        catch(e) {
-            console.error(e)
-        }
+        switch(attacker) {
+            case 'viking':
+                return this.vikingAttack();
+            case 'saxon':
+                return this.saxonAttack();
+            default:
+                return 'attacker should be a Viking or Saxon'
+        } 
         
     }
     showStatus() {
