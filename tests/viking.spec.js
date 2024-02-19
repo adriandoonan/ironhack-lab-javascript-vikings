@@ -348,6 +348,45 @@ describe('War', () => {
       });
     });
 
+    describe('attack() method', () => {
+      it('should be declared', () => {
+        expect(typeof war.attack).toBe('function');
+      });
+      
+      it('should receive 1 argument', () => {
+        expect(war.attack.length).toEqual(1);
+      });
+
+      it('should throw an error if called with some bad string', () => {
+        expect(() => {
+          war.attack('foo');
+        }).toThrowError(Error)
+      });
+
+      it('should return "Vikings have won the war of the century!", if the Saxons array is empty', () => {
+        war.attack('viking');
+        expect(war.showStatus()).toEqual(
+          'Vikings have won the war of the century!'
+        );
+      });
+
+      it('should return "Saxons have fought for their lives and survived another day...", if the Vikings array is empty', () => {
+        for (let i = 0; i < 12; i++) {
+          war.attack('saxon');
+        }
+        expect(war.showStatus()).toEqual(
+          'Saxons have fought for their lives and survived another day...'
+        );
+      });
+
+      it('should return "Vikings and Saxons are still in the thick of battle.", if there are still both Vikings and Saxons', () => {
+        expect(war.showStatus()).toEqual(
+          'Vikings and Saxons are still in the thick of battle.'
+        );
+      });
+
+    })
+
     describe('showStatus() method', () => {
       it('should be a declared', () => {
         expect(typeof war.showStatus).toBe('function');
