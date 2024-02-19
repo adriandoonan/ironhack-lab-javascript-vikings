@@ -98,7 +98,7 @@ class War {
             case 'saxon':
                 return this.saxonAttack();
             default:
-                return 'attacker should be a Viking or Saxon'
+                throw new Error('attacker should be a Viking or Saxon')
         } 
         
     }
@@ -130,7 +130,13 @@ let war = new War()
 
 war.addSaxon(sax)
 war.addViking(gorm)
+try {
+    war.attack([])
+}
+catch(e) {
+    console.error(e)
+}
 war.attack('viking')
 war.attack('viking')
-war.attack('viking')
+war.attack('vikingd')
 war.showStatus()
